@@ -76,3 +76,23 @@ kubectl get deployments
 kubectl logs deployments/dummy1
 kubectl describe deployments/dummy1
 ```
+
+# Bundle
+
+```shell
+make bundle
+make bundle-build
+```
+
+# Shell
+
+```shell
+# If shell completion is not already enabled in your environment you will need
+# to enable it. You can execute the following once:
+$ echo "autoload -U compinit; compinit" >> ~/.zshrc
+
+# To load completions for each session, execute once:
+$ operator-sdk completion zsh > "${fpath[1]}/_operator-sdk"
+
+# You will need to start a new shell for this setup to take effect.
+```
