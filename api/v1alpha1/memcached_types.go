@@ -39,6 +39,7 @@ type MemcachedStatus struct {
 }
 
 //+kubebuilder:object:root=true
+//+kubebuilder:resource:scope=Namespaced
 //+kubebuilder:subresource:status
 
 // Memcached is the Schema for the memcacheds API
