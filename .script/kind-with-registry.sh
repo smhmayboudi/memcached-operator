@@ -25,7 +25,7 @@ containerdConfigPatches:
 - |-
   [plugins."io.containerd.grpc.v1.cri".registry]
     config_path = "/etc/containerd/certs.d"
-name: server-services-next-cluster
+name: memcached-operator-cluster
 nodes:
 - image: kindest/node:v1.29.0
   role: control-plane

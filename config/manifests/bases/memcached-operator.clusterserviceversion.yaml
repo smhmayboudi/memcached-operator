@@ -58,6 +58,7 @@ spec:
   - email: your@email.com
     name: Maintainer Name
   maturity: alpha
+  minKubeVersion: 1.29.0
   provider:
     name: Provider Name
     url: https://your.domain

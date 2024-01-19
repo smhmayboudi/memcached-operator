@@ -77,13 +77,6 @@ kubectl logs deployments/dummy1
 kubectl describe deployments/dummy1
 ```
 
-# Bundle
-
-```shell
-make bundle
-make bundle-build
-```
-
 # Shell
 
 ```shell
@@ -95,4 +88,121 @@ $ echo "autoload -U compinit; compinit" >> ~/.zshrc
 $ operator-sdk completion zsh > "${fpath[1]}/_operator-sdk"
 
 # You will need to start a new shell for this setup to take effect.
+```
+
+# OLM
+
+## OLM Integration Bundle Quickstart
+
+Export environment variables
+
+```shell
+export CHANNELS=development
+export DEFAULT_CHANNEL=development
+export USERNAME=smhmayboudi
+export VERSION=0.0.1
+export IMAGE_TAG_BASE=docker.io/$USERNAME/memcached-operator
+export IMG=$IMAGE_TAG_BASE:v$VERSION
+# export BUNDLE_IMG=docker.io/$USERNAME/memcached-operator-bundle:v$VERSION
+# export CATALOG_IMG=docker.io/$USERNAME/memcached-operator-catalog:v$VERSION
+```
+
+Create a bundle from the root directory of your project
+
+```shell
+make bundle
+```
+
+Build and push the bundle image
+
+```shell
+make bundle-build bundle-push
+```
+
+Validate the bundle
+
+```shell
+operator-sdk bundle validate
+```
+
+Install the bundle with OLM
+
+```shell
+operator-sdk run bundle
+```
+
+Deploying bundles in production
+
+```shell
+make catalog-build catalog-push
+```
+
+All
+
+```shell
+make bundle-build bundle-push catalog-build catalog-push
+```
+
+## OLM and Bundle CLI Overview
+
+OLM installation
+
+```shell
+operator-sdk olm install
+operator-sdk olm status
+operator-sdk olm uninstall
+```
+
+Manifests and metadata
+
+```shell
+operator-sdk generate kustomize manifests
+```
+
+Bundles
+
+```shell
+make bundle
+make bundle-build
+operator-sdk run bundle
+```
+
+## Generating Manifests and Metadata
+
+
+
+# Extra
+
+```shell
+operator-sdk generate kustomize manifests
+
+operator-sdk run bundle localhost:5001/smhmayboudi/memcached-operator-bundle:v0.0.1 --skip-tls --skip-tls-verify
+
+operator-sdk bundle validate --list-optional
+operator-sdk bundle validate ./bundle --select-optional suite=operatorframework 
+operator-sdk bundle validate ./bundle --select-optional suite=operatorframework --optional-values=k8s-version=1.29.0
+operator-sdk bundle validate ./bundle --select-optional name=community
+operator-sdk bundle validate ./bundle --select-optional name=community --optional-values=image-path=bundle.Dockerfile
+```
+
+```shell
+kubectl get pods --all-namespaces
+kubectl exec -it <your_pod> -- /bin/bash
+
+kubectl get configmaps
+```
+
+```shell
+kubectl get catalogsource -n olm
+kubectl get catalogsource  operatorhubio-catalog -n olm -oyaml
+
+kubectl get csv -n olm
+kubectl get csv packageserver -n olm -oyaml
+
+kubectl get subscriptions -n olm
+
+kubectl get installplans -n olm
+kubectl get installplans install-xxxxx -n operators -oyaml
+
+kubectl get operators operator-application.operators -n olm -oyaml
 ```

@@ -15,8 +15,8 @@ spec:
   description: Memcached Operator description. TODO.
   displayName: Memcached Operator
   icon:
-  - base64data: ""
-    mediatype: ""
+  - base64data: "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+    mediatype: "image/png"
   install:
     spec:
       deployments: []
@@ -39,6 +39,7 @@ spec:
   - email: your@email.com
     name: Maintainer Name
   maturity: alpha
+  minKubeVersion: 1.29.0
   provider:
     name: Provider Name
     url: https://your.domain
