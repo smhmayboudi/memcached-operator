@@ -2,9 +2,34 @@
 
 ## Preparing
 
+### Kind
+
+Installation, and Test
+NOTE: kind-registry:5000
+
 ```shell
 ./.script/kind-with-registry.sh
-export MEMCACHED_IMAGE="memcached:1.6.23-alpine3.19"
+curl -v http://localhost:5000/v2/_catalog
+```
+
+### Minikube
+
+Installation, Running, Start Local Registry, and Test
+NOTE: registry
+
+```shell
+brew install minikube
+minikube start
+minikube addons enable registry
+curl -v http://localhost:61655/v2/_catalog
+```
+
+If you need to change the default port forwarding.
+
+```shell
+kubectl port-forward --namespace kube-system service/registry 5000:80
+docker run --rm -it --network=host alpine ash -c "apk add socat && socat TCP-LISTEN:5000,reuseaddr,fork TCP:host.docker.internal:5000"
+
 ```
 
 ## Docker
@@ -183,6 +208,7 @@ operator-sdk bundle validate ./bundle --select-optional suite=operatorframework
 operator-sdk bundle validate ./bundle --select-optional suite=operatorframework --optional-values=k8s-version=1.29.0
 operator-sdk bundle validate ./bundle --select-optional name=community
 operator-sdk bundle validate ./bundle --select-optional name=community --optional-values=image-path=bundle.Dockerfile
+operator-sdk bundle validate ./bundle --select-optional name=multiarch
 ```
 
 ```shell
@@ -194,15 +220,19 @@ kubectl get configmaps
 
 ```shell
 kubectl get catalogsource -n olm
-kubectl get catalogsource  operatorhubio-catalog -n olm -oyaml
+kubectl get catalogsource  operatorhubio-catalog -n olm -o yaml
 
 kubectl get csv -n olm
-kubectl get csv packageserver -n olm -oyaml
+kubectl get csv packageserver -n olm -o yaml
 
 kubectl get subscriptions -n olm
 
 kubectl get installplans -n olm
-kubectl get installplans install-xxxxx -n operators -oyaml
+kubectl get installplans install-xxxxx -n operators -o yaml
 
-kubectl get operators operator-application.operators -n olm -oyaml
+kubectl get operators operator-application.operators -n olm -o yaml
+```
+
+```shell
+kubebuilder edit --plugins grafana/v1-alpha
 ```

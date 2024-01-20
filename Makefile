@@ -285,3 +285,20 @@ catalog-build: opm ## Build a catalog image.
 .PHONY: catalog-push
 catalog-push: ## Push a catalog image.
 	$(MAKE) docker-push IMG=$(CATALOG_IMG)
+
+.PHONY: kubebuilder
+KUBEBUILDER = ./bin/kubebuilder
+kubebuilder: ## Download kubebuilder locally if necessary.
+ifeq (,$(wildcard $(KUBEBUILDER)))
+ifeq (,$(shell which kubebuilder 2>/dev/null))
+	@{ \
+	set -e ;\
+	mkdir -p $(dir $(KUBEBUILDER)) ;\
+	OS=$(shell go env GOOS) && ARCH=$(shell go env GOARCH) && \
+	curl -sSLo $(KUBEBUILDER) https://github.com/kubernetes-sigs/kubebuilder/releases/download/v3.13.0/kubebuilder_$${OS}_$${ARCH} ;\
+	chmod +x $(KUBEBUILDER) ;\
+	}
+else
+KUBEBUILDER = $(shell which kubebuilder)
+endif
+endif
