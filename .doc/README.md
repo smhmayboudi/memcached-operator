@@ -235,4 +235,23 @@ kubectl get operators operator-application.operators -n olm -o yaml
 
 ```shell
 kubebuilder edit --plugins grafana/v1-alpha
+kubebuilder create api \
+    --group="cache" \
+    --image-container-command="memcached,-m=64,-o,modern,-v" \
+    --image-container-port="11211" \
+    --image="memcached:1.6.23-alpine3.19" \
+    --kind="Memcached" \
+    --plugins="deploy-image/v1-alpha" \
+    --run-as-user="1001" \
+    --version="v1alpha1"
+
+operator-sdk create api \
+    --group="cache" \
+    --image-container-command="memcached,-m=64,-o,modern,-v" \
+    --image-container-port="11211" \
+    --image="memcached:1.6.23-alpine3.19" \
+    --kind="Memcached2" \
+    --plugins="deploy-image/v1-alpha" \
+    --run-as-user="1001" \
+    --version="v2alpha1"
 ```
