@@ -255,3 +255,24 @@ operator-sdk create api \
     --run-as-user="1001" \
     --version="v2alpha1"
 ```
+
+# Tools
+
+## Development
+
+- https://github.com/kubernetes-sigs/controller-runtime
+- https://github.com/kubernetes-sigs/controller-tools
+- https://github.com/kubernetes-sigs/kubebuilder
+- https://github.com/kubernetes-sigs/kustomize
+- https://github.com/kudobuilder/kuttl
+- https://github.com/operator-framework/operator-registry
+- https://github.com/operator-framework/operator-sdk
+
+
+## Management
+
+- https://github.com/ahmetb/kubectx
+- https://github.com/danielfoehrKn/kubeswitch
+- https://github.com/jonmosco/kube-ps1
+- https://github.com/undistro/zora
+- https://github.com/wagoodman/dive
