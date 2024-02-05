@@ -24,7 +24,7 @@ metadata:
         }
       ]
     capabilities: Basic Install
-    createdAt: "2024-01-22T12:03:04Z"
+    createdAt: "2024-01-22T15:18:24Z"
     operators.operatorframework.io/builder: operator-sdk-v1.33.0
     operators.operatorframework.io/project_layout: go.kubebuilder.io/v4
   name: memcached-operator.v0.0.1

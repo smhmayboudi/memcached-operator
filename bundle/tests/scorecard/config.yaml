@@ -65,6 +65,16 @@ stages:
     storage:
       spec:
         mountPath: {}
+  - entrypoint:
+    - custom-scorecard-tests
+    - customtest1
+    image: quay.io/<username>/custom-scorecard-tests:latest
+    labels:
+      suite: custom
+      test: customtest1
+    storage:
+      spec:
+        mountPath: {}
 storage:
   spec:
     mountPath: {}
